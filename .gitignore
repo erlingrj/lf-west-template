@@ -1,0 +1,8 @@
+application/src-gen
+application/bin
+application/build
+
+scripts/__pycache__
+build/
+
+deps/
