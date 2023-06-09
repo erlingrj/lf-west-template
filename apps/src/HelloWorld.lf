@@ -1,0 +1,22 @@
+target C {
+    platform: "Zephyr",
+    threading: false,
+};
+
+main reactor {
+    preamble {=
+        #include <zephyr/kernel.h>
+    =}
+    timer t(0, 1 sec)
+
+    reaction(t) {=
+        // k_busy_wait(1000000);
+        int log = lf_time_logical_elapsed();
+        // int phy = lf_time_physical_elapsed();
+        uint32_t now = k_cycle_get_32();
+        instant_t phy;
+        lf_clock_gettime(&phy);
+        lf_print("tag=%i phy=%i cyc=%u", log, (int) phy ,now);
+    =}
+}
+
